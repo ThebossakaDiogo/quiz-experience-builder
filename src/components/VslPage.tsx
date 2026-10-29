@@ -1,6 +1,9 @@
 import { useNavigate } from "@tanstack/react-router";
 import { createElement, useEffect, useRef, useState } from "react";
 
+// Link para onde as pessoas vão quando o vídeo terminar (vale para os dois vídeos).
+export const AFTER_VIDEO_URL = "";
+
 type C = [string, string, string, "red" | "gray" | "amber" | "yellow"];
 const comments: C[] = [
   ["MS", "Marcos Silva", "gente que coincidência achei esse vídeo, justo hoje que minha conta tava no vermelho", "red"],
@@ -22,7 +25,7 @@ const comments: C[] = [
 ];
 
 
-export function VslPage({ playerId: PLAYER_ID, playerSrc: PLAYER_SRC, desktopRedirect }: { playerId: string; playerSrc: string; desktopRedirect?: string }) {
+export function VslPage({ playerId: PLAYER_ID, playerSrc: PLAYER_SRC, desktopRedirect, endRedirect = AFTER_VIDEO_URL }: { endRedirect?: string; playerId: string; playerSrc: string; desktopRedirect?: string }) {
   const navigate = useNavigate();
   useEffect(() => {
     if (desktopRedirect && !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) navigate({ to: desktopRedirect, replace: true });
@@ -31,6 +34,15 @@ export function VslPage({ playerId: PLAYER_ID, playerSrc: PLAYER_SRC, desktopRed
   const [typing, setTyping] = useState(true);
   const [viewers, setViewers] = useState(1452);
   const boxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!endRedirect) return;
+    const onEnded = () => {
+      window.location.href = endRedirect + (endRedirect.includes("?") ? "&" : "?") + window.location.search.slice(1);
+    };
+    document.addEventListener("video:ended", onEnded, true);
+    return () => document.removeEventListener("video:ended", onEnded, true);
+  }, [endRedirect]);
 
   useEffect(() => {
     if (document.querySelector(`script[src="${PLAYER_SRC}"]`)) return;
