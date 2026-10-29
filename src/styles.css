@@ -142,3 +142,49 @@
     color: var(--color-foreground);
   }
 }
+
+/* VSL page tokens */
+:root {
+  --vsl-bg: oklch(0 0 0);
+  --vsl-fg: oklch(1 0 0);
+  --vsl-red: oklch(0.577 0.215 27.3);
+  --vsl-red-dark: oklch(0.444 0.161 26.9);
+  --vsl-amber: oklch(0.666 0.157 58.3);
+  --vsl-yellow: oklch(0.795 0.162 86);
+  --vsl-gray: oklch(0.442 0.017 285.8);
+  --vsl-zinc-300: oklch(0.871 0.006 286.3);
+  --vsl-zinc-400: oklch(0.705 0.015 286.1);
+  --vsl-zinc-500: oklch(0.552 0.016 285.9);
+  --vsl-zinc-700: oklch(0.37 0.013 285.8);
+  --vsl-zinc-900: oklch(0.21 0.006 285.9);
+  --vsl-panel: oklch(0.178 0 0);
+}
+.vsl-page { min-height: 100vh; background: var(--vsl-bg); color: var(--vsl-fg); font-family: Inter, ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.vsl-container { width: 100%; max-width: 800px; margin: 0 auto; padding: 40px 16px 8px; }
+.vsl-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 6px; background: color-mix(in oklab, var(--vsl-red) 90%, transparent); font-size: 14px; font-weight: 600; letter-spacing: .025em; text-transform: uppercase; }
+.vsl-badge svg { width: 16px; height: 16px; flex: none; }
+.vsl-h1 { margin: 20px 0 0; text-align: center; font-size: 48px; line-height: 1.25; font-weight: 800; }
+.vsl-h1 span { color: var(--vsl-red); }
+.vsl-player { margin-top: 28px; overflow: hidden; border: 1px solid color-mix(in oklab, var(--vsl-red-dark) 60%, transparent); border-radius: 8px; background: var(--vsl-zinc-900); box-shadow: 0 10px 40px -12px color-mix(in oklab, var(--vsl-red) 35%, transparent); }
+.vsl-viewers { display: flex; align-items: center; gap: 8px; margin-top: 16px; color: var(--vsl-zinc-300); font-size: 16px; }
+.vsl-viewers strong { color: var(--vsl-fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+.vsl-dot { display: inline-block; width: 10px; height: 10px; flex: none; border-radius: 999px; background: var(--vsl-red); animation: vsl-pulse 1.8s ease-in-out infinite; }
+.vsl-ctitle { display: flex; align-items: center; gap: 8px; margin: 20px 0 8px; }
+.vsl-ctitle .vsl-dot { width: 8px; height: 8px; }
+.vsl-ctitle h2 { margin: 0; color: var(--vsl-zinc-400); font-size: 14px; font-weight: 600; letter-spacing: .025em; text-transform: uppercase; }
+.vsl-box { max-height: 350px; padding: 16px; overflow-y: auto; border-radius: 8px; background: var(--vsl-panel); scrollbar-width: thin; scrollbar-color: var(--vsl-zinc-700) var(--vsl-panel); scroll-behavior: smooth; }
+.vsl-comment { display: flex; align-items: flex-start; gap: 12px; animation: vsl-fade .35s ease-out both; }
+.vsl-comment + .vsl-comment, .vsl-comment + .vsl-typing { margin-top: 12px; }
+.vsl-avatar { display: flex; width: 36px; height: 36px; flex: none; align-items: center; justify-content: center; border-radius: 999px; color: color-mix(in oklab, var(--vsl-fg) 90%, transparent); font-size: 12px; font-weight: 700; }
+.vsl-red { background: oklch(0.444 0.177 26.9); } .vsl-gray { background: var(--vsl-gray); } .vsl-amber { background: var(--vsl-amber); } .vsl-yellow { background: var(--vsl-yellow); }
+.vsl-name { font-size: 14px; font-weight: 600; }
+.vsl-msg { margin: 2px 0 0; color: var(--vsl-zinc-300); font-size: 14px; line-height: 1.625; }
+.vsl-typing { display: flex; align-items: center; gap: 6px; padding-left: 4px; color: var(--vsl-gray); font-size: 12px; }
+.vsl-tdot { width: 5px; height: 5px; border-radius: 999px; background: var(--vsl-zinc-500); animation: vsl-typing 1.2s ease-in-out infinite; }
+.vsl-tdot:nth-child(2) { animation-delay: .15s; } .vsl-tdot:nth-child(3) { animation-delay: .3s; }
+.vsl-footer { margin-top: 40px; padding: 20px 0 8px; border-top: 1px solid var(--vsl-zinc-900); display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; color: var(--vsl-gray); font-size: 12px; }
+.vsl-footer a:hover { color: var(--vsl-zinc-500); }
+@keyframes vsl-pulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 color-mix(in oklab, var(--vsl-red) 45%, transparent); } 50% { opacity: .62; box-shadow: 0 0 0 5px transparent; } }
+@keyframes vsl-fade { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+@keyframes vsl-typing { 0%,60%,100% { opacity: .3; transform: none; } 30% { opacity: 1; transform: translateY(-2px); } }
+@media (max-width: 767px) { .vsl-container { padding-top: 24px; } .vsl-badge { font-size: 12px; } .vsl-h1 { font-size: 30px; } .vsl-viewers { font-size: 14px; } }
